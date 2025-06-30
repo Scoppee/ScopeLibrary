@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scope Library || Get Access to books</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="./Javascript/script.js" defer></script>
+</head>
+<body>
+    <div class="overall">
+        <div class="header">
+            <div class="logo">Scope<span class="sec-color">Lit</span></div>
+            <ul class="nav-bar">
+                <li>Home</li>
+                <li>Pages</li>
+                <li>Shop</li>
+                <li>Blog</li>
+            </ul>
+            <div class="contact addBook">Add Book</div>
+        </div>
+
+        <div class="hero-section">
+            <section class="left">
+                <h1>
+                    Buy and sell your textbooks for the best price
+                </h1>
+                <p>
+                    Your gateway to a world of knowledge, stories, and discovery. Dive into 
+                    curated collections that inspire learning, imagination, and growth.
+                </p>
+                <div class="search">
+                    <span>Search for a book</span>
+                    <div class="search-btn">Search</div>
+                </div>
+            </section>
+
+            <section class="right">
+                <img src="./img/anthills-of-the-savannah.jpeg" alt="An Arrow of God By Chinua Achebe">
+                <div class="author">
+                    <h5>Anthills of the Savannah</h5>
+                    <p>Chinua Achebe</p>
+                </div>
+            </section>
+        </div>
+
+        <div class="authors-section">
+            <h1>Authors</h1>
+            <div class="cards">
+                <div class="card">
+                    <h4>Prof. Wole Soyinka</h4>
+                </div>
+
+                <div class="card">
+                    <h4>Prof. Wole Soyinka</h4>
+                </div>
+
+                <div class="card">
+                    <h4>Prof. Wole Soyinka</h4>
+                </div>
+
+                <div class="card">
+                    <h4>Prof. Wole Soyinka</h4>
+                </div>
+
+            </div>
+        </div>
+
+
+
+        <div class="authors-section">
+            <h1>Our Book Collection</h1>
+            <div class="cards books">
+                <div class="card book">
+                    <div class="image">
+                        <img src="./img/a-man-of-the-people-cover.jpeg" alt="A man of The People">
+                    </div>
+                    <div class="image-details">
+                        <h3 class="bookTitle">A Man of the People</h3>
+                        <h6 class="authorName">Chinua Achebe</h6>
+                        <h6 class="pages">300 Pages</h6>
+                        <button class="book-btn complete">Mark Complete</button>
+                        <button class="book-btn delete">Delete</button>
+                    </div>
+
+                </div>
+
+
+                <div class="card book">
+                    <div class="image">
+                        <img src="./img/how-to-writ-your-destiny.jpeg" alt="How to write your Destiny">
+                    </div>
+                    <div class="image-details">
+                        <h3 class="bookTitle">How to Write your Destiny</h3>
+                        <h6 class="authorName">Mark Manson</h6>
+                        <h6>300 Pages</h6>
+                        <button class="book-btn complete">Mark Complete</button>
+                        <button class="book-btn delete">Delete</button>
+                    </div>
+                    
+                </div>
+
+                
+            </div>
+        </div>
+
+
+        <div class="footer">
+            <h1>Developed by Scope</h1>
+        </div>
+
+
+
+
+        <div class="overlay">
+            <div class="add-book-panel panel">
+                <div class="title">
+                    <h2>Add Task</h2>
+                    <span class="close goBack">Go Back</span>
+                </div>
+                <div class="form-inputs">
+                    <form action="">
+                        <div>
+                            <label for="bookName">Book Name</label>
+                            <input type="text" id="bookName">
+                        </div>
+                        <div>
+                            <label for="authorName">Author Name</label>
+                            <input type="text" id="authorName">
+                        </div>
+                        <div>
+                            <label for="pagesNumber">Number of Pages</label>
+                            <input type="tel" id="pagesNumber">
+                        </div>
+                        <div>
+                            <label for="bookCover">Book Cover</label>
+                            <input type="file" id="bookCover" accept="image/*">
+                        </div>
+                    </form>
+                </div>
+                <button type="button" class="book-btn addBtn">
+                    Add
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
