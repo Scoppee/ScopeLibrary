@@ -13,15 +13,6 @@ const book = document.querySelector(".book")
 const allBookCards = document.querySelectorAll(".book")
 
 
-
-
-
-
-
-
-
-
-
 addBook.addEventListener('click', () => {
     panel.classList.add('active');
     overlay.classList.add('active');
@@ -43,8 +34,7 @@ panel.addEventListener('click', (e) => {
 
 
 
-
-const myLibrary = [];
+let myLibrary = [];
 
 
 // CONSTRUCTOR FUNCTION OF BOOK
@@ -96,12 +86,6 @@ function addBookToLibrary() {
   let pagesOfBook = pagesNumber.value
 
     let coverOfBook = theGlobalBookCover; 
-   
-
-  
-
-
-  
   const newBook = new Book(nameOfBook, nameOfAuthor, pagesOfBook, coverOfBook);
         return newBook;
   
@@ -109,67 +93,54 @@ function addBookToLibrary() {
 
 
 // FUNCION THAT CREATES A NEW CARD
-    
-function displayCard(i) {
-    // for (let i = myLibrary.length - 1; i < myLibrary.length; i++) {
+
+
+function createNewBook(book, index){
+        // Card Div - Parent Element
         const bookCard = document.createElement("div");
         bookCard.classList.add("card")
         bookCard.classList.add("book")
-        bookCard.dataset.uniqueId = myLibrary[i].id;
-        bookCard.dataset.arrayLength = myLibrary.length - 1;
+        bookCard.dataset.uniqueId = book.id;
+        bookCard.dataset.arrayLength = index;
 
+        // Image container
         const imageParent = document.createElement("div");
         imageParent.classList.add("image");
 
         const coverImage = document.createElement("img")
-        coverImage.src = myLibrary[i].bookcover;
-        
+        coverImage.src = book.bookcover;
 
-        
-
+        // Image Details Container
         const imageDetails = document.createElement("div");
         imageDetails.classList.add("image-details");
 
+        // Book Title
         const title = document.createElement("h3")
         title.classList.add("bookTitle")
-        title.innerText = myLibrary[i].bookname
+        title.innerText = book.bookname
 
+        // Author's Name
         const author = document.createElement("h6")
         author.classList.add("authorName")
-        author.innerText = myLibrary[i].authorname
+        author.innerText = book.authorname
 
+        // Number of Pages
         const pages = document.createElement("h6")
-        pages.classList.add("authorName")
-        pages.innerText = myLibrary[i].pagesnumber
+        pages.innerText = book.pagesnumber
 
+        // Mark Complete Button
         const complete = document.createElement("button");
         complete.classList.add("book-btn", "complete");
-        complete.innerHTML = myLibrary[i].read ? "Completed" : "Mark Complete";
-        complete.dataset.arrayLength = i;
+        complete.innerHTML = "Mark Complete"
 
-        // ✅ Add event listener directly here
-        // complete.addEventListener('click', () => {
-        //     myLibrary[i].toggleRead();
-        //     complete.innerHTML = myLibrary[i].read ? "Completed" : "Mark Complete";
-        // });
-
+        // Delete Button
         const deleteCard = document.createElement("button")
         deleteCard.classList.add("book-btn")
         deleteCard.classList.add("delete")
         deleteCard.innerHTML = "Delete";
-        deleteCard.dataset.uniqueId = myLibrary[i].id;
-        
-        
 
-        // complete.addEventListener('click', () => {
-        //     if(myLibrary[i].read){
-        //         myLibrary[i].read = false;
-        //     }else{
-        //         myLibrary[i].read = true;
-        //     }
-        // })
 
-        books.appendChild(bookCard);
+        // books.appendChild(bookCard);
         bookCard.appendChild(imageParent)
         imageParent.appendChild(coverImage)
         bookCard.appendChild(imageDetails)
@@ -179,28 +150,20 @@ function displayCard(i) {
         imageDetails.appendChild(complete)
         imageDetails.appendChild(deleteCard)
 
+        return bookCard;
 
 
-        const deleteAll = document.querySelectorAll(".delete")
-        deleteAll.forEach(deleteBtn => {
-            deleteBtn.addEventListener('click', (e) => {
-                const id = deleteBtn.getAttribute("data-unique-id");
-                const theBook = document.querySelector(`.book[data-unique-id= "${id}"]`);
-                if(theBook){
-                    theBook.remove()
-                }
-        
-        
-            })
-        });
+}
 
 
+    
+function displayCard(i) {
         const markComplete = document.querySelectorAll(".complete");
         markComplete.forEach(markCompleteBtn => {
             
             markCompleteBtn.addEventListener('click', (e) => {
                 const index = markCompleteBtn.getAttribute("data-array-length");
-                const theIndex = document.querySelector(`.book[data-array-length= "${index}"]`);
+                const theIndex = document.querySelector(`.book[data-array-length="${index}"]`);
                 if(theIndex){
                     console.log("Inde is true" + index)
                     myLibrary[index].toggleRead();
@@ -220,13 +183,43 @@ function displayCard(i) {
 
 // FUNCTION THAT HANDLES THE CLICK OF ADD BOOK
 addBtn.addEventListener('click', (e) => {
-    e.preventDefault()
-    // 
+    e.preventDefault() 
     let newDetail = addBookToLibrary();
     myLibrary.push(newDetail);
     console.log(myLibrary)
-    let numberOfDetails = myLibrary.length - 1;
-    displayCard(numberOfDetails);
+    let recentBook = createNewBook(newDetail, myLibrary.length - 1);
+    books.appendChild(recentBook);
+
 })
 
 
+
+books.addEventListener('click', (e) => {
+  const completeBtn = e.target.closest('.complete');
+
+  if (completeBtn && books.contains(completeBtn)) {
+    const card = completeBtn.closest('.card');
+    const id = card.dataset.uniqueId;
+    console.log("You dey work?");
+    myLibrary = myLibrary.map(book => {
+        if (book.id === id) {
+          book.read = !book.read;
+          e.target.textContent = book.read ? "Completed" : "Mark Complete";
+        }
+        return book;
+      });
+      
+
+    
+    // toggle book by id
+  }
+
+  const deleteBtn = e.target.closest('.delete');
+  if (deleteBtn && books.contains(deleteBtn)) {
+    const card = deleteBtn.closest('.card');
+    const id = card.dataset.uniqueId;
+    card.remove()
+    myLibrary = myLibrary.filter(book => book.id !== id);
+     console.log(id)
+  }
+});
