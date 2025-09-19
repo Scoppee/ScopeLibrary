@@ -92,6 +92,7 @@ ul li:hover{
     border-radius: 8px;
     color: #ffffff;
     font-weight: 900;
+    cursor: pointer;
 }
 
 .logo span{
@@ -233,6 +234,7 @@ span.block{
     color: #fff;
     font-weight: bold;
     margin-top: 3px;
+    margin-right: 10px;
     cursor: pointer;
 }
 
